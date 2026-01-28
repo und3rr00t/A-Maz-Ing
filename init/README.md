@@ -1,1 +1,5 @@
-# C-Brothers
+# PRNG
+# IMPERFECT
+# CURSES
+# BFS
+# 42
