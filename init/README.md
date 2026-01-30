@@ -1,6 +1,0 @@
-# PRNG
-# IMPERFECT
-# 42
-# BFS
-# CURSES
-# MLX

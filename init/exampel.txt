@@ -1,6 +1,0 @@
-WIDTH=15
-HEIGHT=15
-ENTRY=0,0
-EXIT=0,14
-OUTPUT_FILE=maze_random.txt
-PERFECT=False
