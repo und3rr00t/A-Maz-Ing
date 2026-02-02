@@ -14,7 +14,7 @@
 git clone https://github.com/SEGV-Survivors/A-Maze-Ing.git
 cd A-Maze-Ing
 ```
-2. **Setup Dependencies:**Ensure you have Python 3.10+ installed. Use the provided `Makefile` to install necessary linting and packaging tools:
+2. **Setup Dependencies:** Ensure you have Python 3.10+ installed. Use the provided `Makefile` to install necessary linting and packaging tools:
 ```Bash
 make install
 ```
