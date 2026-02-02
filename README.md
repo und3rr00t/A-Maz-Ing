@@ -72,7 +72,7 @@ The logic is strictly decoupled through a package structure:
 ## Team & Project Management
 ---
 ### C-Brothers team
-#### ### Roles
+#### Roles
 * **OUSAMA ED-DAHBI (**`oused-da`**)**:
 * **ADAM RAJI (**`adraji`**)**:
 
