@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build-meta"
+
+[project]
+name = "mazegen-adraji-oused-da"
+version = "1.8.5"
+description = "A reusable maze generation module for 42 project"
+authors = [
+    { name = "Adam Raji", email = "adraji@student.1337.ma" },
+    { name = "Ousama Ed-Dahbi", email = "oused-da@student.1337.ma" }
+]
+dependencies = []
+requires-python = ">=3.12"
+
+[tool.setuptools]
+packages = ["maze_generator"]

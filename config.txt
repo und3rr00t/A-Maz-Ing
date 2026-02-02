@@ -1,0 +1,23 @@
+# --- Maze Configuration ---
+
+# --------------------------------------
+# Required keys:
+
+WIDTH=30
+HEIGHT=30
+
+ENTRY=6,0
+EXIT=19,19
+
+OUTPUT_FILE=maze_output.txt
+
+# PERFECT: choise(True, False)
+PERFECT=True
+
+# --------------------------------------
+# Additional Keys:
+
+# SEED=1769678149
+
+# ALGORITHM: choise(DFS, WILSON)
+ALGORITHM=DfS
