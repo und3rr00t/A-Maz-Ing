@@ -1,16 +1,7 @@
 import sys
-import time
-from maze_generator import MazeGenerator, report_error, player_mode, getch
-
-
-def clear_screen() -> None:
-    """
-    Clears the terminal screen using ANSI escape codes.\n
-
-    Returns:
-        None\n
-    """
-    print("\033[H\033[J", end="")
+from mazegen import (
+    TerminalCtl, MazeGenerator, report_error, player_mode
+)
 
 
 def a_maz_ing() -> None:
@@ -24,20 +15,13 @@ def a_maz_ing() -> None:
     Returns:
         None\n
     """
+    TerminalCtl.clear_screen()
     gen_maze = MazeGenerator(sys.argv[1])
-    maze = gen_maze.get_maze()
-    gen_maze.generate_maze()
-
-    if not maze.perfection:
-        gen_maze.make_imperfect(chance=1)
-
-    path = gen_maze.solve_maze()
-    path_coords = gen_maze.get_path_coords(path)
-    gen_maze.write_output(path)
-    gen_maze.display_maze([])
+    gen_maze.generate_maze(True)
+    gen_maze.write_output()
 
     print(f"\nMaze generated & saved to {gen_maze.get_maze().output_file}")
-    print(f"Solution Path Length: {len(path)}")
+    print(f"Solution Path Length: {len(gen_maze.get_solution_path())}")
     print("-" * 30)
     print("1. Show Solution Path")
     print("2. Regenerate New Maze")
@@ -46,45 +30,27 @@ def a_maz_ing() -> None:
 
     while True:
 
-        choice = getch()
+        choice = TerminalCtl.getch().lower()
         while choice not in ('1', '2', '3', '4'):
-            choice = getch()
+            choice = TerminalCtl.getch().lower()
 
         if choice == '1':
             while True:
-                clear_screen()
-                gen_maze.display_maze()
-                print("1. Show step solving")
-                print("2. Show path")
-                replay = getch()
-                while replay not in ('1', '2', '3', '4'):
-                    replay = getch()
-                if replay == '1':
-                    gen_maze.solve_maze_visual()
-                else:
-                    clear_screen()
-                    time.sleep(0.5)
-                    tmp_coords = []
-                    for coord in path_coords:
-                        tmp_coords.append(coord)
-                        gen_maze.display_maze(tmp_coords)
-                        time.sleep(0.1)
-                        if coord != path_coords[-1]:
-                            clear_screen()
+                gen_maze.solve_maze(True)
 
                 print("1. Regenerate Solution Path")
                 print("2. Regenerate New Maze")
                 print("3. Play Mode")
                 print("4. Quit")
 
-                choice = getch()
+                choice = TerminalCtl.getch().lower()
                 while choice not in ('1', '2', '3', '4'):
-                    choice = getch()
+                    choice = TerminalCtl.getch().lower()
 
                 if choice == '1':
                     continue
                 else:
-                    clear_screen()
+                    TerminalCtl.clear_screen()
                     break
         if choice == '2':
             return
@@ -129,5 +95,7 @@ def main() -> None:
 if __name__ == "__main__":
     try:
         main()
-    except KeyboardInterrupt:
+    except BaseException:
         pass
+    finally:
+        TerminalCtl.clean_up()

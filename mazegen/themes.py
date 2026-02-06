@@ -1,34 +1,5 @@
-import sys
-import tty
-import termios
 from typing import Dict, Tuple, Callable
-
-
-def getch() -> str:
-    """
-    Reads a single character from the standard input.
-
-    Returns:
-        str: The character read from input.
-    """
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
-
-
-def clear_screen() -> None:
-    """
-    Clears the terminal screen using ANSI escape codes.
-
-    Returns:
-        None
-    """
-    print("\033[H\033[J", end="")
+from .terminal_ctl import TerminalCtl
 
 
 class Themes:
@@ -53,6 +24,7 @@ class Themes:
         Returns:
             None
         """
+        # Use Callable to be explicit about dictionary values
         theme_options: Dict[str, Callable[[], Dict[str, str]]] = {
             '1': self.get_badlands_theme,
             '2': self.get_dark_forest_theme,
@@ -84,9 +56,9 @@ class Themes:
         print("4. Pale Garden Theme.")
         print("5. Custom.")
 
-        reply = getch()
+        reply = TerminalCtl.getch().lower()
         while reply not in options:
-            reply = getch()
+            reply = TerminalCtl.getch().lower()
 
         return options[reply]()
 
@@ -184,13 +156,17 @@ class Themes:
                 Tuple[int, int, int]: Validated RGB values.
             """
             while True:
-                try:
-                    r = int(input("Enter Red (0-255): ")) % 256
-                    g = int(input("Enter Green (0-255): ")) % 256
-                    b = int(input("Enter Blue (0-255): ")) % 256
-                    return (r, g, b)
-                except ValueError:
-                    print("Invalid input. Please enter numbers only.")
+                hex_val = input("Enter color code (e.g., #ffffff): #").strip()
+                if len(hex_val) == 6:
+                    try:
+                        return (
+                            int(hex_val[0:2], 16),
+                            int(hex_val[2:4], 16),
+                            int(hex_val[4:6], 16)
+                        )
+                    except ValueError:
+                        pass
+                print("Invalid format. Use #RRGGBB (e.g., #ffffff).")
 
         elements: Dict[str, str] = {
             "Wall": "W_C",

@@ -1,7 +1,7 @@
 import sys
 import random
 from .maze import Maze
-from .themes import getch
+from .terminal_ctl import TerminalCtl
 from typing import List, Tuple
 from .error_class import Y, RS
 
@@ -102,7 +102,7 @@ class Cell:
             print(f"{Y}Warning{RS}: Maze size too small for '42' pattern.")
             print("1. Continue")
             print("2. Quit")
-            replay = getch()
+            replay = TerminalCtl.getch().lower()
             if replay != '1':
                 sys.exit(0)
             return cells
@@ -115,7 +115,7 @@ class Cell:
             )
             print("1. Continue")
             print("2. Quit")
-            replay = getch()
+            replay = TerminalCtl.getch().lower()
             if replay != '1':
                 sys.exit(0)
             return cells
