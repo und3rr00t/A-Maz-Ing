@@ -2,7 +2,6 @@
 # A-Maze-Ing
 ---
 
-
 ## Description
 ---
 **A-Maze-Ing** is a terminal-based application designed to generate, solve, and play within complex mazes. Developed as part of the 1337/42 Network journey, the project’s goal is to demonstrate mastery over graph traversal algorithms, bitwise logic, and object-oriented Python design. It provides a highly customizable experience where users can define maze dimensions, choose generation algorithms, and even play through the results using a terminal-based game mode.
